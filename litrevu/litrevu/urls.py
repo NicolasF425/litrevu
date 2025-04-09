@@ -28,5 +28,5 @@ urlpatterns = [
          name='login'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
-    path('home/', appli.views.home, name='home'),
+    path('flux/', appli.views.flux, name='flux'),
 ]
