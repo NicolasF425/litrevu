@@ -19,6 +19,9 @@ from django.urls import path
 from django.contrib.auth.views import LoginView
 import authentication.views
 import appli.views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +32,8 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('flux/', appli.views.flux, name='flux'),
-]
+    path('ticket/', appli.views.create_ticket, name='ticket')
+    ]
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
