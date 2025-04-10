@@ -32,7 +32,9 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('flux/', appli.views.flux, name='flux'),
-    path('ticket/', appli.views.create_ticket, name='ticket')
+    path('ticket/', appli.views.create_ticket, name='ticket'),
+    path('critic/', appli.views.create_critic, name='critic'),
+    path('response/<int:ticket_id>/', appli.views.create_response, name='response'),
     ]
 if settings.DEBUG:
     urlpatterns += static(
