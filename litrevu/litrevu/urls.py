@@ -33,6 +33,7 @@ urlpatterns = [
     path('signup/', authentication.views.signup_page, name='signup'),
     path('flux/', appli.views.flux, name='flux'),
     path('ticket/', appli.views.create_ticket, name='ticket'),
+    path('ticket/<int:ticket_id>/edit/', appli.views.edit_ticket, name='edit_ticket'),
     path('critic/', appli.views.create_critic, name='critic'),
     path('response/<int:ticket_id>/', appli.views.create_response, name='response'),
     ]

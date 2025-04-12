@@ -18,6 +18,30 @@ def create_ticket(request):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket_form.save()
+
+            return redirect('flux')
+
+    context = {
+        'ticket_form': ticket_form,
+    }
+    return render(request, 'appli/create_ticket.html', context=context)
+
+
+@login_required
+def edit_ticket(request, ticket_id):
+    ticket_form = forms.TicketForm()
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    ticket_form = forms.TicketForm(instance=ticket)
+    if request.method == 'POST':
+        # handle the POST request here
+        ticket_form = forms.TicketForm(request.POST, instance=ticket)
+        if (ticket_form.is_valid()):
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket_form.save()
+
+            return redirect('flux')
+
     context = {
         'ticket_form': ticket_form,
     }
