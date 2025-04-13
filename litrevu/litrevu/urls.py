@@ -34,8 +34,10 @@ urlpatterns = [
     path('flux/', appli.views.flux, name='flux'),
     path('ticket/', appli.views.create_ticket, name='ticket'),
     path('ticket/<int:ticket_id>/edit/', appli.views.edit_ticket, name='edit_ticket'),
-    path('critic/', appli.views.create_critic, name='critic'),
+    path('critic/', appli.views.create_review, name='critic'),
+    path('critic/<int:critic_id>/edit/', appli.views.edit_review, name='edit_critic'),
     path('response/<int:ticket_id>/', appli.views.create_response, name='response'),
+    path('response/<int:response_id>/edit/', appli.views.edit_response, name='response'),
     ]
 if settings.DEBUG:
     urlpatterns += static(
