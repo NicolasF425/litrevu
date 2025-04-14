@@ -1,0 +1,17 @@
+{% extends 'base_connected.html' %}
+
+{% block content %}
+
+<h1>Liste des tickets</h1>
+
+<ul>
+    {% for ticket in tickets %}
+        <li>
+            {{ ticket.title }}
+            <a href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
+            <a href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

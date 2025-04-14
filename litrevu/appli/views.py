@@ -27,6 +27,11 @@ def create_ticket(request):
     return render(request, 'appli/create_ticket.html', context=context)
 
 
+def ticket_list(request):
+    tickets = models.Ticket.objects.all()
+    return render(request, 'appli/ticket_list.html', {'tickets': tickets})
+
+
 @login_required
 def edit_ticket(request, ticket_id):
     ticket_form = forms.TicketForm()
@@ -46,6 +51,18 @@ def edit_ticket(request, ticket_id):
         'ticket_form': ticket_form,
     }
     return render(request, 'appli/create_ticket.html', context=context)
+
+
+@login_required
+def delete_ticket(request, ticket_id):
+    ticket = models.Ticket.objects.get(id=ticket_id)
+
+    if request.method == 'POST':
+        # handle the POST request here
+        ticket.delete()
+        return redirect('flux')
+
+    return render(request, 'appli/delete_ticket.html', {'ticket': ticket})
 
 
 @login_required
