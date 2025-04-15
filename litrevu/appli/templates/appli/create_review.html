@@ -3,7 +3,7 @@
     <h2>Écrire un billet</h2>
     <form method="post" enctype="multipart/form-data">
         {{ ticket_form.as_p }}
-        {{ critic_form.as_p }}
+        {{ review_form.as_p }}
         {% csrf_token %}
         <button type="submit" >Publier</button>
     </form>

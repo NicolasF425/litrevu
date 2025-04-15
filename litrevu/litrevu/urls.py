@@ -36,10 +36,12 @@ urlpatterns = [
     path('ticket/list/', appli.views.ticket_list, name='ticket_list'),
     path('ticket/<int:ticket_id>/edit/', appli.views.edit_ticket, name='edit_ticket'),
     path('ticket/<int:ticket_id>/delete/', appli.views.delete_ticket, name='delete_ticket'),
-    path('critic/', appli.views.create_review, name='critic'),
-    path('critic/<int:critic_id>/edit/', appli.views.edit_review, name='edit_critic'),
+    path('review/', appli.views.create_review, name='review'),
+    path('review/list/', appli.views.review_list, name='review_list'),
+    path('review/<int:review_id>/edit/', appli.views.edit_review, name='edit_review'),
+    path('review/<int:review_id>/delete/', appli.views.delete_review, name='delete_review'),
     path('response/<int:ticket_id>/', appli.views.create_response, name='response'),
-    path('response/<int:response_id>/edit/', appli.views.edit_response, name='response'),
+    path('response/<int:response_id>/edit/', appli.views.edit_response, name='edit_response'),
     ]
 if settings.DEBUG:
     urlpatterns += static(

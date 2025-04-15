@@ -68,74 +68,91 @@ def delete_ticket(request, ticket_id):
 @login_required
 def create_review(request):
     ticket_form = forms.TicketForm()
-    critic_form = forms.CriticForm()
+    review_form = forms.ReviewForm()
     if request.method == 'POST':
         # handle the POST request here
         ticket_form = forms.TicketForm(request.POST, request.FILES, prefix='first')
-        critic_form = forms.CriticForm(request.POST, prefix='second')
-        if all([ticket_form.is_valid(), critic_form.is_valid()]):
+        review_form = forms.reviewForm(request.POST, prefix='second')
+        if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()
-            critic = critic_form.save(commit=False)
-            critic.user = request.user
-            critic.ticket = ticket
-            critic.save()
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
 
             return redirect('flux')
 
     context = {
         'ticket_form': ticket_form,
-        'critic_form': critic_form,
+        'review_form': review_form,
     }
-    return render(request, 'appli/create_critic.html', context=context)
+    return render(request, 'appli/create_review.html', context=context)
+
+
+def review_list(request):
+    reviews = models.Review.objects.all()
+    return render(request, 'appli/review_list.html', {'reviews': reviews})
 
 
 @login_required
-def edit_review(request, critic_id):
-    critic = get_object_or_404(models.Review, id=critic_id)
-    ticket = get_object_or_404(models.Ticket, id=critic.ticket.id)
-    critic_form = forms.CriticForm(instance=critic, prefix='second')
+def edit_review(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    ticket = get_object_or_404(models.Ticket, id=review.ticket.id)
+    review_form = forms.ReviewForm(instance=review, prefix='second')
     ticket_form = forms.TicketForm(instance=ticket, prefix='first')
     if request.method == 'POST':
         # handle the POST request here
         ticket_form = forms.TicketForm(request.POST, request.FILES, prefix='first', instance=ticket)
-        critic_form = forms.CriticForm(request.POST, prefix='second', instance=critic)
-        if all([ticket_form.is_valid(), critic_form.is_valid()]):
+        review_form = forms.reviewForm(request.POST, prefix='second', instance=review)
+        if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.save()
-            critic = critic_form.save(commit=False)
-            critic.ticket = ticket
-            critic.save()
+            review = review_form.save(commit=False)
+            review.ticket = ticket
+            review.save()
 
             return redirect('flux')
 
     context = {
         'ticket_form': ticket_form,
-        'critic_form': critic_form,
+        'review_form': review_form,
     }
-    return render(request, 'appli/create_critic.html', context=context)
+    return render(request, 'appli/create_review.html', context=context)
+
+
+@login_required
+def delete_review(request, review_id):
+    review = models.Review.objects.get(id=review_id)
+
+    if request.method == 'POST':
+        # handle the POST request here
+        review.delete()
+        return redirect('flux')
+
+    return render(request, 'appli/delete_review.html', {'review': review})
 
 
 @login_required
 def create_response(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     ticket_form = forms.TicketForm(instance=ticket)
-    critic_form = forms.CriticForm()
+    review_form = forms.ReviewForm()
     if request.method == 'POST':
         # handle the POST request here
-        critic_form = forms.CriticForm(request.POST, )
-        if (critic_form.is_valid()):
-            critic = critic_form.save(commit=False)
-            critic.user = request.user
-            critic.ticket = ticket
-            critic.save()
+        review_form = forms.ReviewForm(request.POST, )
+        if (review_form.is_valid()):
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
 
             return redirect('flux')
 
     context = {
         'ticket_form': ticket_form,
-        'critic_form': critic_form,
+        'review_form': review_form,
     }
     return render(request, 'appli/create_response.html', context=context)
 
@@ -145,18 +162,18 @@ def edit_response(request, response_id):
     response = get_object_or_404(models.Review, id=response_id)
     ticket = get_object_or_404(models.Ticket, id=response.ticket.id)
     ticket_form = forms.TicketForm(instance=ticket)
-    critic_form = forms.CriticForm(instance=response)
+    review_form = forms.ReviewForm(instance=response)
     if request.method == 'POST':
         # handle the POST request here
-        critic_form = forms.CriticForm(request.POST, instance=response)
-        if (critic_form.is_valid()):
-            critic = critic_form.save(commit=False)
-            critic.save()
+        review_form = forms.ReviewForm(request.POST, instance=response)
+        if (review_form.is_valid()):
+            review = review_form.save(commit=False)
+            review.save()
 
             return redirect('flux')
 
     context = {
         'ticket_form': ticket_form,
-        'critic_form': critic_form,
+        'review_form': review_form,
     }
     return render(request, 'appli/create_response.html', context=context)

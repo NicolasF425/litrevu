@@ -10,6 +10,7 @@
             {{ ticket.title }}
             <a href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
             <a href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+            <a href="{% url 'response' ticket.id %}">Créer une critique</a>
         </li>
     {% endfor %}
 </ul>

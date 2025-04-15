@@ -8,7 +8,7 @@ class TicketForm(forms.ModelForm):
         fields = ['title', 'description', 'image']
 
 
-class CriticForm(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     class Meta:
         model = models.Review
         fields = ['headline', 'rating', 'body']
