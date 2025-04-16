@@ -19,3 +19,11 @@ class ReviewForm(forms.ModelForm):
 
 class UserToFollowForm(forms.Form):
     user_to_follow = forms.CharField()
+
+
+class UserFollowedForm(forms.Form):
+    user_followed = forms.Textarea(attrs={'rows': 1, 'cols': 60})
+
+
+class FollowersForm(forms.Form):
+    followers = forms.Textarea(attrs={'rows': 1, 'cols': 80})

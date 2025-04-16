@@ -184,15 +184,28 @@ def edit_response(request, response_id):
 def check_user_to_follow(request):
     form = forms.UserToFollowForm(request.POST)
     user_follows = models.UserFollows()
-    if form.is_valid():
-        user_to_follow = form.cleaned_data['user_to_follow']
-        resultats = User.objects.filter(username__icontains=user_to_follow)
-        print(resultats)
-        print(request.user)
-        user_follows.user = request.user
-        user_follows.followed_user = resultats[0]
-        user_follows.save()
+    if request.method == 'POST':
+        if form.is_valid():
+            user_to_follow = form.cleaned_data['user_to_follow']
+            resultats = User.objects.filter(username__icontains=user_to_follow)
+            print(resultats)
+            print(request.user)
+            user_follows.user = request.user
+            user_follows.followed_user = resultats[0]
+            user_follows.save()
+    followed_users = User.objects.filter(
+        id__in=request.user.following.all().values_list('followed_user', flat=True)
+    )
+    followers = User.objects.filter(
+        id__in=request.user.followed_by.all().values_list('user', flat=True)
+    )
+    print(followed_users)
+    print(followers)
+
     context = {
-        'form': form
+        'form': form,
+        'followed_users': followed_users,
+        'followers': followers,
+
     }
     return render(request, 'appli/subscriptions.html', context=context)
