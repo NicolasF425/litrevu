@@ -15,3 +15,7 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'body': forms.Textarea(attrs={'rows': 4, 'cols': 60}),
         }
+
+
+class UserToFollowForm(forms.Form):
+    user_to_follow = forms.CharField()

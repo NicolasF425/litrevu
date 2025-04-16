@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . import forms, models
+from authentication.models import User
 
 
 @login_required
@@ -177,3 +178,21 @@ def edit_response(request, response_id):
         'review_form': review_form,
     }
     return render(request, 'appli/create_response.html', context=context)
+
+
+@login_required
+def check_user_to_follow(request):
+    form = forms.UserToFollowForm(request.POST)
+    user_follows = models.UserFollows()
+    if form.is_valid():
+        user_to_follow = form.cleaned_data['user_to_follow']
+        resultats = User.objects.filter(username__icontains=user_to_follow)
+        print(resultats)
+        print(request.user)
+        user_follows.user = request.user
+        user_follows.followed_user = resultats[0]
+        user_follows.save()
+    context = {
+        'form': form
+    }
+    return render(request, 'appli/subscriptions.html', context=context)
