@@ -1,4 +1,31 @@
 {% extends 'base_connected.html' %}
 {% block content %}
     <p>FLUX</p>
+
+    <h1>Liste des tickets</h1>
+
+    <ul>
+        {% for ticket in tickets %}
+            <li>
+                {{ ticket.title }}
+                <a href="{% url 'edit_ticket' ticket.id %}">Modifier</a>
+                <a href="{% url 'delete_ticket' ticket.id %}">Supprimer</a>
+                <a href="{% url 'response' ticket.id %}">Créer une critique</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h1>Liste des critiques</h1>
+    
+    <ul>
+        {% for review in reviews %}
+            <li>
+                {{ review.headline }}
+                <a href="{% url 'edit_review' review.id %}">Modifier</a>
+                <a href="{% url 'delete_review' review.id %}">Supprimer</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
 {% endblock content %}

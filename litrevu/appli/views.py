@@ -1,12 +1,33 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from . import forms, models
 from authentication.models import User
 
 
 @login_required
 def flux(request):
-    return render(request, 'appli/flux.html')
+    current_user = request.user
+    tickets = models.Ticket.objects.all()
+    reviews = models.Review.objects.all()
+
+    followed = models.UserFollows.objects.filter(followed_user=current_user).values_list('user', flat=True)
+
+    tickets = models.Ticket.objects.filter(
+        Q(user=current_user) |  # Tickets créés par l'utilisateur connecté
+        Q(user__in=followed)  # OU créés par les utilisateurs suivis
+    ).order_by('-time_created')
+
+    reviews = models.Review.objects.filter(
+        Q(user=current_user) |  # Reviews crééss par l'utilisateur connecté
+        Q(user__in=followed)  # OU créées par les utilisateurs suivis
+    ).order_by('-time_created')
+
+    context = {
+        'tickets': tickets,
+        'reviews': reviews,
+    }
+    return render(request, 'appli/flux.html', context=context)
 
 
 @login_required
@@ -188,8 +209,6 @@ def check_user_to_follow(request):
         if form.is_valid():
             user_to_follow = form.cleaned_data['user_to_follow']
             resultats = User.objects.filter(username__icontains=user_to_follow)
-            print(resultats)
-            print(request.user)
             user_follows.user = request.user
             user_follows.followed_user = resultats[0]
             user_follows.save()
@@ -199,8 +218,6 @@ def check_user_to_follow(request):
     followers = User.objects.filter(
         id__in=request.user.followed_by.all().values_list('user', flat=True)
     )
-    print(followed_users)
-    print(followers)
 
     context = {
         'form': form,
