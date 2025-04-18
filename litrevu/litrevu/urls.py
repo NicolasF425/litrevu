@@ -42,6 +42,7 @@ urlpatterns = [
     path('review/<int:review_id>/delete/', appli.views.delete_review, name='delete_review'),
     path('response/<int:ticket_id>/', appli.views.create_response, name='response'),
     path('response/<int:response_id>/edit/', appli.views.edit_response, name='edit_response'),
+    path('post_list/', appli.views.post_list, name='post_list'),
     path('subscriptions/', appli.views.check_user_to_follow, name='subscriptions')
     ]
 if settings.DEBUG:

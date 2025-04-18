@@ -3,10 +3,7 @@
 
 {% block content %}
 
-    <p><a href="{% url 'ticket' %}">Demander une critique</a></p>
-    <a href="{% url 'review' %}">Créer une critique</a>
-
-    <h1>Liste des tickets et critiques</h1>
+    <h1>Mes posts</h1>
 
     <ul>
         {% for post in posts %}
