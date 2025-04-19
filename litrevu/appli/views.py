@@ -76,11 +76,6 @@ def create_ticket(request):
     return render(request, 'appli/create_ticket.html', context=context)
 
 
-def ticket_list(request):
-    tickets = models.Ticket.objects.all()
-    return render(request, 'appli/ticket_list.html', {'tickets': tickets})
-
-
 @login_required
 def edit_ticket(request, ticket_id):
     ticket_form = forms.TicketForm()
@@ -141,11 +136,6 @@ def create_review(request):
         'review_form': review_form,
     }
     return render(request, 'appli/create_review.html', context=context)
-
-
-def review_list(request):
-    reviews = models.Review.objects.all()
-    return render(request, 'appli/review_list.html', {'reviews': reviews})
 
 
 @login_required

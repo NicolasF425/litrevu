@@ -1,29 +1,33 @@
 {% extends 'base_connected.html' %}
 {% load custom_filters %}
 
+
 {% block content %}
 
-    <p><a href="{% url 'ticket' %}">Demander une critique</a></p>
-    <a href="{% url 'review' %}">Créer une critique</a>
+    <div>
+        <p><a href="{% url 'ticket' %}">Demander une critique</a>
+        <a href="{% url 'review' %}">Créer une critique</a></p>
+    </div>
 
     <h1>Liste des tickets et critiques</h1>
 
-    <ul>
         {% for post in posts %}
-            {% if post|get_class == 'Ticket' %}
-                <li>
-                    {{ post.title }}
-                    <a href="{% url 'edit_ticket' post.id %}">Modifier</a>
-                    <a href="{% url 'delete_ticket' post.id %}">Supprimer</a>
+            <div class="div_border">
+                {% if post|get_class == 'Ticket' %}
+                    <p>{{ post.title }}</p>
+                    <p>{{ post.time_created }}</p>
+                    <p>{{ post.description }}</p>
                     <a href="{% url 'response' post.id %}">Créer une critique</a>
-                </li>
-            {% elif post|get_class == 'Review' %}
-                <li>
-                    {{ post.headline }}
-                    <a href="{% url 'edit_review' post.id %}">Modifier</a>
-                    <a href="{% url 'delete_review' post.id %}">Supprimer</a>
-                </li>
-            {% endif %}
+                {% elif post|get_class == 'Review' %}
+                    <p>{{ post.headline }} </p>
+                    <p>{{ post.body }}</p>
+                    <div class="div_border"> 
+                        <p>{{ post.ticket.title }}</p>
+                        <p>{{ post.ticket.description }}</p>
+                    </div>
+
+                {% endif %}
+            </div>
         {% endfor %}
     </ul>
 
