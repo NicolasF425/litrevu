@@ -119,7 +119,7 @@ def create_review(request):
     if request.method == 'POST':
         # handle the POST request here
         ticket_form = forms.TicketForm(request.POST, request.FILES, prefix='first')
-        review_form = forms.reviewForm(request.POST, prefix='second')
+        review_form = forms.ReviewForm(request.POST, prefix='second')
         if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user

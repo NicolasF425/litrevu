@@ -5,8 +5,8 @@
 {% block content %}
 
     <div>
-        <p><a href="{% url 'ticket' %}">Demander une critique</a>
-        <a href="{% url 'review' %}">Créer une critique</a></p>
+        <p><a href="{% url 'ticket' %}" class="button">Demander une critique</a>
+        <a href="{% url 'review' %}" class="button">Créer une critique</a></p>
     </div>
 
     <h1>Liste des tickets et critiques</h1>
@@ -17,15 +17,16 @@
                     <p>{{ post.title }}</p>
                     <p>{{ post.time_created }}</p>
                     <p>{{ post.description }}</p>
-                    <a href="{% url 'response' post.id %}">Créer une critique</a>
+                    <img src="/media/{{post.image}}" alt="image">
+                    <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
                 {% elif post|get_class == 'Review' %}
                     <p>{{ post.headline }} </p>
                     <p>{{ post.body }}</p>
                     <div class="div_border"> 
+                        <p>Ticket - {{ post.user.username }}</p>
                         <p>{{ post.ticket.title }}</p>
                         <p>{{ post.ticket.description }}</p>
                     </div>
-
                 {% endif %}
             </div>
         {% endfor %}

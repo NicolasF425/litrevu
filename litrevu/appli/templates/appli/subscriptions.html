@@ -1,20 +1,20 @@
 {% extends 'base_connected.html' %}
 {% block content %}
-    <div>
+    <div class="div_border">
         <h2><p>S'abonner</p></h2>
         <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <button type="submit" >Envoyer</button>
+            <button type="submit">Envoyer</button>
         </form>
     </div>
-    <div>
+    <div class="div_border">
         <h2>vos abonnements</h2>
         {% for instance in followed_users %}
             <p>{{ instance.username }}</p>
         {% endfor %}
     </div>
-    <div>
+    <div class="div_border">
         <h2>vos abonnés</h2>
         {% for instance in followers %}
             <p>{{ instance.username }}</p>
