@@ -4,6 +4,7 @@
         <h2><p>S'abonner</p></h2>
         <form method="post">
             {{ form.as_p }}
+            <p>{{ user_not_found }}</p>
             {% csrf_token %}
             <button type="submit">Envoyer</button>
         </form>
@@ -11,7 +12,7 @@
     <div class="div_border">
         <h2>vos abonnements</h2>
         {% for instance in followed_users %}
-            <p>{{ instance.username }}</p>
+            <p>{{ instance.followed_user.username }} <a href="{% url 'delete_following' instance.id %}" class="button">Supprimer</a></p>
         {% endfor %}
     </div>
     <div class="div_border">

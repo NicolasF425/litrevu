@@ -4,6 +4,7 @@ from django.db.models import Q
 from itertools import chain
 from . import forms, models
 from authentication.models import User
+from appli.models import UserFollows
 
 
 @login_required
@@ -223,18 +224,20 @@ def edit_response(request, response_id):
 
 @login_required
 def check_user_to_follow(request):
+    user_not_found = ""
     form = forms.UserToFollowForm(request.POST)
     user_follows = models.UserFollows()
     if request.method == 'POST':
         if form.is_valid():
             user_to_follow = form.cleaned_data['user_to_follow']
             resultats = User.objects.filter(username__icontains=user_to_follow)
-            user_follows.user = request.user
-            user_follows.followed_user = resultats[0]
-            user_follows.save()
-    followed_users = User.objects.filter(
-        id__in=request.user.following.all().values_list('followed_user', flat=True)
-    )
+            if resultats:
+                user_follows.user = request.user
+                user_follows.followed_user = resultats[0]
+                user_follows.save()
+            else:
+                user_not_found = "Utilisateur non trouvé"
+    followed_users = UserFollows.objects.filter(user=request.user)
     followers = User.objects.filter(
         id__in=request.user.followed_by.all().values_list('user', flat=True)
     )
@@ -243,6 +246,19 @@ def check_user_to_follow(request):
         'form': form,
         'followed_users': followed_users,
         'followers': followers,
+        'user_not_found': user_not_found,
 
     }
     return render(request, 'appli/subscriptions.html', context=context)
+
+
+@login_required
+def delete_following(request, user_follows_id):
+    following = models.UserFollows.objects.get(id=user_follows_id)
+
+    if request.method == 'POST':
+        # handle the POST request here
+        following.delete()
+        return redirect('subscriptions')
+
+    return render(request, 'appli/delete_following.html', {'following': following})
