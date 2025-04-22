@@ -2,9 +2,38 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from itertools import chain
+from functools import wraps
 from . import forms, models
 from authentication.models import User
 from appli.models import UserFollows
+
+
+def is_ticket_owner(view_func):
+    @wraps(view_func)
+    def wrapper(request, ticket_id, *args, **kwargs):
+        from .models import Ticket  # Import à l'intérieur pour éviter les imports circulaires
+
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+        if ticket.user == request.user:
+            return view_func(request, ticket_id, *args, **kwargs)
+        else:
+            return redirect('flux')
+    return wrapper
+
+
+def is_review_owner(view_func):
+    @wraps(view_func)
+    def wrapper(request, review_id, *args, **kwargs):
+        from .models import Review  # Import à l'intérieur pour éviter les imports circulaires
+
+        review = get_object_or_404(Review, id=review_id)
+
+        if review.user == request.user:
+            return view_func(request, review_id, *args, **kwargs)
+        else:
+            return redirect('flux')
+    return wrapper
 
 
 @login_required
@@ -21,7 +50,7 @@ def flux(request):
     ).order_by('-time_created')
 
     reviews = models.Review.objects.filter(
-        Q(user=current_user) |  # Reviews crééss par l'utilisateur connecté
+        Q(user=current_user) |  # Reviews créés par l'utilisateur connecté
         Q(user__in=followed)  # OU créées par les utilisateurs suivis
     ).order_by('-time_created')
 
@@ -78,6 +107,7 @@ def create_ticket(request):
 
 
 @login_required
+@is_ticket_owner
 def edit_ticket(request, ticket_id):
     ticket_form = forms.TicketForm()
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
@@ -102,6 +132,7 @@ def edit_ticket(request, ticket_id):
 
 
 @login_required
+@is_ticket_owner
 def delete_ticket(request, ticket_id):
     ticket = models.Ticket.objects.get(id=ticket_id)
 
@@ -140,6 +171,7 @@ def create_review(request):
 
 
 @login_required
+@is_review_owner
 def edit_review(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
     ticket = get_object_or_404(models.Ticket, id=review.ticket.id)
@@ -166,6 +198,7 @@ def edit_review(request, review_id):
 
 
 @login_required
+@is_review_owner
 def delete_review(request, review_id):
     review = models.Review.objects.get(id=review_id)
 
@@ -201,6 +234,7 @@ def create_response(request, ticket_id):
 
 
 @login_required
+@is_review_owner
 def edit_response(request, response_id):
     response = get_object_or_404(models.Review, id=response_id)
     ticket = get_object_or_404(models.Ticket, id=response.ticket.id)

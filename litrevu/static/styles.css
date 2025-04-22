@@ -1,5 +1,22 @@
 .div_border {
-    margin: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+}
+
+.div_margins {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.div_margins_border {
+    margin-left: 100px;
+    margin-right: 100px;
     padding: 20px;
     border-width:2px;
     border-style:solid;
@@ -41,3 +58,27 @@ img {
     width: auto;       /* Maintient le ratio d'aspect */
     height: auto;      /* Maintient le ratio d'aspect */
   }
+
+.header-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.left-space {
+    width: 0;
+    flex: 1;
+}
+
+.title {
+    text-align: center;
+    margin: 0;
+    flex: 2;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-end;
+}

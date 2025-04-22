@@ -6,12 +6,17 @@
         <title>LITReview</title>
     </head>
     <body>
-        <div>
-            <p><h1>LITReview</h1>
-            <a href="{% url 'flux' %}">Flux</a>
-            <a href="{% url 'post_list' %}">Posts</a>
-            <a href="{% url 'subscriptions' %}">Abonnements</a>
-            <a href="{% url 'logout' %}">Se déconnecter</a></p>
+        <div class="div_border">
+            <div class="header-container">
+                <div class="left-space"></div>
+                <h1 class="title">LITReview</h1>
+                <div class="nav-links">
+                    <a href="{% url 'flux' %}">Flux</a>
+                    <a href="{% url 'post_list' %}">Posts</a>
+                    <a href="{% url 'subscriptions' %}">Abonnements</a>
+                    <a href="{% url 'logout' %}">Se déconnecter</a></p>
+                </div>
+            </div>
         </div>
         {% block content %}{% endblock content %}
     </body>

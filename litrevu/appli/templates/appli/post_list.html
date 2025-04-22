@@ -5,34 +5,33 @@
 
     <h1>Mes posts</h1>
 
-    <ul>
-        {% for post in posts %}
-            {% if post|get_class == 'Ticket' %}
-                <div class="div_border">
-                    <p>{{ post.title }}</p>
-                    <p>{{ post.time_created }}</p>
-                    <p>{{ post.description }}</p>
-                    <img src="/media/{{post.image}}" alt="image">
-                    <a href="{% url 'edit_ticket' post.id %}" class="button">Modifier</a>
-                    <a href="{% url 'delete_ticket' post.id %}" class="button">Supprimer</a>
-                    <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
+    {% for post in posts %}
+        {% if post|get_class == 'Ticket' %}
+            <div class="div_border">
+                <p>{{ post.title }}</p>
+                <p>{{ post.time_created }}</p>
+                <p>{{ post.description }}</p>
+                <img src="/media/{{post.image}}" alt="image">
+                <a href="{% url 'edit_ticket' post.id %}" class="button">Modifier</a>
+                <a href="{% url 'delete_ticket' post.id %}" class="button">Supprimer</a>
+                <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
+            </div>
+        {% elif post|get_class == 'Review' %}
+            <div class="div_border">
+                <p>{{ post.headline }} </p>
+                <p>{{ post.time_created }}</p>
+                <p>{{ post.body }}</p>
+                <div class="div_border"> 
+                    <p>Ticket - {{ post.user.username }}</p>
+                    <p>{{ post.ticket.title }}</p>
+                    <p>{{ post.ticket.description }}</p>
+                    <img src="/media/{{post.ticket.image}}" alt="image">
                 </div>
-            {% elif post|get_class == 'Review' %}
-                <div class="div_border">
-                    <p>{{ post.headline }} </p>
-                    <p>{{ post.body }}</p>
-                    <div class="div_border"> 
-                        <p>Ticket - {{ post.user.username }}</p>
-                        <p>{{ post.ticket.title }}</p>
-                        <p>{{ post.ticket.description }}</p>
-                        <img src="/media/{{post.ticket.image}}" alt="image">
-                    </div>
-                    <a href="{% url 'edit_review' post.id %}" class="button">Modifier</a>
-                    <a href="{% url 'delete_review' post.id %}" class="button">Supprimer</a>
-                </div>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
+                <a href="{% url 'edit_review' post.id %}" class="button">Modifier</a>
+                <a href="{% url 'delete_review' post.id %}" class="button">Supprimer</a>
+            </div>
+            
+        {% endif %}
+    {% endfor %}
 
 {% endblock content %}
