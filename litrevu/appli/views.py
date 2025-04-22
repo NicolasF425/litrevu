@@ -148,7 +148,7 @@ def edit_review(request, review_id):
     if request.method == 'POST':
         # handle the POST request here
         ticket_form = forms.TicketForm(request.POST, request.FILES, prefix='first', instance=ticket)
-        review_form = forms.reviewForm(request.POST, prefix='second', instance=review)
+        review_form = forms.ReviewForm(request.POST, prefix='second', instance=review)
         if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.save()
