@@ -3,7 +3,9 @@
 
 {% block content %}
 
-    <h1>Mes posts</h1>
+    <div class="div_margins">
+        <h1>Mes posts</h1>
+    </div>
 
     {% for post in posts %}
         {% if post|get_class == 'Ticket' %}
@@ -11,7 +13,9 @@
                 <p>{{ post.title }}</p>
                 <p>{{ post.time_created }}</p>
                 <p>{{ post.description }}</p>
-                <img src="/media/{{post.image}}" alt="image">
+                {% if post.image %}
+                        <img src="/media/{{post.image}}" alt="image">
+                    {% endif %}
                 <a href="{% url 'edit_ticket' post.id %}" class="button">Modifier</a>
                 <a href="{% url 'delete_ticket' post.id %}" class="button">Supprimer</a>
                 <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
@@ -21,7 +25,7 @@
                 <p>{{ post.headline }} </p>
                 <p>{{ post.time_created }}</p>
                 <p>{{ post.body }}</p>
-                <div class="div_border"> 
+                <div class="div_border_internal"> 
                     <p>Ticket - {{ post.user.username }}</p>
                     <p>{{ post.ticket.title }}</p>
                     <p>{{ post.ticket.description }}</p>

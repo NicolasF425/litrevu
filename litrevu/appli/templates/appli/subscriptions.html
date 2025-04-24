@@ -1,6 +1,6 @@
 {% extends 'base_connected.html' %}
 {% block content %}
-    <div class="div_border">
+    <div class="div_margins">
         <h2><p>S'abonner</p></h2>
         <form method="post">
             {{ form.as_p }}
@@ -9,16 +9,25 @@
             <button type="submit">Envoyer</button>
         </form>
     </div>
-    <div class="div_border">
-        <h2>vos abonnements</h2>
+    <div class="div_margins">
+        <h2>Abonnements</h2>
         {% for instance in followed_users %}
-            <p>{{ instance.followed_user.username }} <a href="{% url 'delete_following' instance.id %}" class="button">Supprimer</a></p>
+            <div class="div_table_border">
+                <div>
+                    <h3>{{ instance.followed_user.username }}</h3>
+                </div>
+                <div>
+                    <a href="{% url 'delete_following' instance.id %}" class="button">Supprimer</a>
+                </div>
+            </div>
         {% endfor %}
     </div>
-    <div class="div_border">
-        <h2>vos abonnés</h2>
+    <div class="div_margins">
+        <h2>Abonnés</h2>
         {% for instance in followers %}
-            <p>{{ instance.username }}</p>
+            <div class="div_table_border">
+                <h3>{{ instance.username }}</h3>
+            </div>
         {% endfor %}
     </div>
     

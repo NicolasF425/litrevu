@@ -1,6 +1,17 @@
 .div_border {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+}
+
+.div_border_internal {
+    margin-left: 5%;
+    margin-right: 5%;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px;
@@ -10,13 +21,23 @@
 }
 
 .div_margins {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.div_table_border {
+    padding-left: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .div_margins_border {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 15%;
+    margin-right: 15%;
     padding: 20px;
     border-width:2px;
     border-style:solid;
@@ -53,8 +74,8 @@
 }
 
 img {
-    max-width: 300px;  /* Largeur maximale */
-    max-height: 300px; /* Hauteur maximale */
+    max-width: 20%;  /* Largeur maximale */
+    max-height: 20%; /* Hauteur maximale */
     width: auto;       /* Maintient le ratio d'aspect */
     height: auto;      /* Maintient le ratio d'aspect */
   }

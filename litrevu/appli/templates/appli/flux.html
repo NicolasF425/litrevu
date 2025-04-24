@@ -12,7 +12,7 @@
         {% for post in posts %}
             <div class="div_border">
                 {% if post|get_class == 'Ticket' %}
-                    <p>Ticket - {{ post.user.username }}</p>
+                    <p>{{ post.user.username }} a demandé une critique</p>
                     <p>{{ post.title }}</p>
                     <p>{{ post.time_created }}</p>
                     <p>{{ post.description }}</p>
@@ -24,11 +24,12 @@
                     <p>{{ post.headline }} </p>
                     <p>{{ post.time_created }}</p>
                     <p>{{ post.body }}</p>
-                    <div class="div_border"> 
+                    <div class="div_border_internal"> 
                         <p>Ticket - {{ post.user.username }}</p>
                         <p>{{ post.ticket.title }}</p>
-                        <p>{{ post.ticket.description }}</p>
-                        <img src="/media/{{post.ticket.image}}" alt="image">
+                        {% if post.ticket.image %}
+                            <img src="/media/{{post.ticket.image}}" alt="image">
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>
