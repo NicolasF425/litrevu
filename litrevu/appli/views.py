@@ -8,6 +8,8 @@ from authentication.models import User
 from appli.models import UserFollows
 
 
+# décorateur pour limiter les modifications ou suppression
+# de ticket au créateur du ticket
 def is_ticket_owner(view_func):
     @wraps(view_func)
     def wrapper(request, ticket_id, *args, **kwargs):
@@ -22,6 +24,8 @@ def is_ticket_owner(view_func):
     return wrapper
 
 
+# décorateur pour limiter les modifications ou suppression
+# de riview au créateur de la review
 def is_review_owner(view_func):
     @wraps(view_func)
     def wrapper(request, review_id, *args, **kwargs):
@@ -157,6 +161,8 @@ def delete_ticket(request, ticket_id):
     return render(request, 'appli/delete_ticket.html', {'ticket': ticket})
 
 
+# Créer un ticket et une review associée
+# puis les sauvegarder
 @login_required
 def create_review(request):
     ticket_form = forms.TicketForm()
@@ -223,6 +229,7 @@ def delete_review(request, review_id):
     return render(request, 'appli/delete_review.html', {'review': review})
 
 
+# Créer une review en réponse à un ticket
 @login_required
 @ticket_has_review
 def create_response(request, ticket_id):

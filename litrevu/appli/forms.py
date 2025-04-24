@@ -34,7 +34,9 @@ class ReviewForm(forms.ModelForm):
 
 
 class UserToFollowForm(forms.Form):
-    user_to_follow = forms.CharField()
+    user_to_follow = forms.CharField(
+        error_messages={'required': ''},  # Message vide pour l'erreur 'required'
+    )
 
 
 class UserFollowedForm(forms.Form):

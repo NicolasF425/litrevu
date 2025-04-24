@@ -1,10 +1,9 @@
 {% extends 'base_connected.html' %}
 {% block content %}
     <div class="div_margins">
-        <h2><p>S'abonner</p></h2>
+        <h2><p>Suivre d'autres utilisateurs</p></h2>
         <form method="post">
-            {{ form.as_p }}
-            <p>{{ user_not_found }}</p>
+            <p>{{ form.user_to_follow }} {{ user_not_found }}</p>
             {% csrf_token %}
             <button type="submit">Envoyer</button>
         </form>

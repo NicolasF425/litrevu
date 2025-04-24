@@ -4,36 +4,35 @@
 
 {% block content %}
 
-    <div class="div_margins">
-        <p><a href="{% url 'ticket' %}" class="button">Demander une critique</a>
-        <a href="{% url 'review' %}" class="button">Créer une critique</a></p>
+    <div class="div_margins div_flex">
+        <a href="{% url 'ticket' %}" class="large_button">Demander une critique</a>
+        <a href="{% url 'review' %}" class="large_button">Créer une critique</a>
     </div>
 
-        {% for post in posts %}
-            <div class="div_border">
-                {% if post|get_class == 'Ticket' %}
-                    <p>{{ post.user.username }} a demandé une critique</p>
-                    <p>{{ post.title }}</p>
-                    <p>{{ post.time_created }}</p>
-                    <p>{{ post.description }}</p>
-                    {% if post.image %}
-                        <img src="/media/{{post.image}}" alt="image">
-                    {% endif %}
-                    <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
-                {% elif post|get_class == 'Review' %}
-                    <p>{{ post.headline }} </p>
-                    <p>{{ post.time_created }}</p>
-                    <p>{{ post.body }}</p>
-                    <div class="div_border_internal"> 
-                        <p>Ticket - {{ post.user.username }}</p>
-                        <p>{{ post.ticket.title }}</p>
-                        {% if post.ticket.image %}
-                            <img src="/media/{{post.ticket.image}}" alt="image">
-                        {% endif %}
-                    </div>
+    {% for post in posts %}
+        <div class="div_border">
+            {% if post|get_class == 'Ticket' %}
+                <p>{{ post.user.username }} a demandé une critique</p>
+                <p>{{ post.title }}</p>
+                <p>{{ post.time_created }}</p>
+                <p>{{ post.description }}</p>
+                {% if post.image %}
+                    <img src="/media/{{post.image}}" alt="image">
                 {% endif %}
-            </div>
-        {% endfor %}
-    </ul>
+                <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
+            {% elif post|get_class == 'Review' %}
+                <p>{{ post.time_created }}</p>
+                <p><h3>{{ post.headline }} - {{ post.rating }} ★</h3></p>
+                <p>{{ post.body }}</p>
+                <div class="div_border_internal"> 
+                    <p>Ticket - {{ post.user.username }}</p>
+                    <p>{{ post.ticket.title }}</p>
+                    {% if post.ticket.image %}
+                        <img src="/media/{{post.ticket.image}}" alt="image">
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
 
 {% endblock content %}
