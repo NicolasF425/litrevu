@@ -16,7 +16,9 @@
                     <p>{{ post.title }}</p>
                     <p>{{ post.time_created }}</p>
                     <p>{{ post.description }}</p>
-                    <img src="/media/{{post.image}}" alt="image">
+                    {% if post.image %}
+                        <img src="/media/{{post.image}}" alt="image">
+                    {% endif %}
                     <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
                 {% elif post|get_class == 'Review' %}
                     <p>{{ post.headline }} </p>

@@ -9,10 +9,26 @@ class TicketForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    RATING_CHOICES = [
+        (0, '0'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5')
+    ]
+
+    rating = forms.ChoiceField(
+        choices=RATING_CHOICES,
+        widget=forms.RadioSelect(),
+        label='Rating'
+    )
+
     class Meta:
         model = models.Review
         fields = ['headline', 'rating', 'body']
         widgets = {
+            'rating': 'Note',
             'body': forms.Textarea(attrs={'rows': 4, 'cols': 60}),
         }
 

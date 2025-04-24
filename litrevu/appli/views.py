@@ -36,6 +36,19 @@ def is_review_owner(view_func):
     return wrapper
 
 
+def ticket_has_review(view_func):
+    @wraps(view_func)
+    def wrapper(request, ticket_id, *args, **kwargs):
+
+        reviewed = models.Review.objects.filter(ticket_id=ticket_id).values_list('ticket', flat=True)
+
+        if reviewed:
+            return redirect('flux')
+        else:
+            return view_func(request, ticket_id, *args, **kwargs)
+    return wrapper
+
+
 @login_required
 def flux(request):
     current_user = request.user
@@ -211,6 +224,7 @@ def delete_review(request, review_id):
 
 
 @login_required
+@ticket_has_review
 def create_response(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     ticket_form = forms.TicketForm(instance=ticket)
@@ -221,6 +235,7 @@ def create_response(request, ticket_id):
         if (review_form.is_valid()):
             review = review_form.save(commit=False)
             review.user = request.user
+            review.rating = int(review_form.cleaned_data['rating'])
             review.ticket = ticket
             review.save()
 

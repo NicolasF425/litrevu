@@ -25,7 +25,9 @@
                     <p>Ticket - {{ post.user.username }}</p>
                     <p>{{ post.ticket.title }}</p>
                     <p>{{ post.ticket.description }}</p>
-                    <img src="/media/{{post.ticket.image}}" alt="image">
+                    {% if post.image %}
+                        <img src="/media/{{post.image}}" alt="image">
+                    {% endif %}
                 </div>
                 <a href="{% url 'edit_review' post.id %}" class="button">Modifier</a>
                 <a href="{% url 'delete_review' post.id %}" class="button">Supprimer</a>

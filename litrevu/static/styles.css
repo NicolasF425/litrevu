@@ -82,3 +82,10 @@ img {
     flex: 1;
     justify-content: flex-end;
 }
+
+.rating-options-inline {
+    display: flex;
+    flex-direction: row; /* Direction normale (de gauche à droite) */
+    justify-content: flex-start;
+    align-items: center;
+}
