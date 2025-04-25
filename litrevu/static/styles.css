@@ -1,3 +1,22 @@
+/* ecran de connexion et inscription */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 10%;
+    margin-top: 5%;
+}
+
+.login-div {
+    width: 40%;
+}
+
+.signup-div {
+    width: 40%;
+    text-align: center;
+}
+
+/* bordure ticket et review */
 .div_border {
     margin-left: 15%;
     margin-right: 15%;
@@ -9,6 +28,7 @@
     border-color:black;
 }
 
+/* bordure ticket dans review */
 .div_border_internal {
     margin-left: 5%;
     margin-right: 5%;
@@ -25,6 +45,7 @@
     margin-right: 15%;
 }
 
+/* bordure abonnements et abonnes */
 .div_table_border {
     padding-left: 5px;
     border-width: 1px;

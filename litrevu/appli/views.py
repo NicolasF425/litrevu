@@ -71,6 +71,7 @@ def flux(request):
         Q(user__in=followed)  # OU créées par les utilisateurs suivis
     ).order_by('-time_created')
 
+    # on fusionne les listes en posts et on les trie par ordre antichronologique
     posts = list(chain(tickets, reviews))
     posts.sort(key=lambda x: x.time_created, reverse=True)
 
