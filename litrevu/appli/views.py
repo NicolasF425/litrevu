@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from itertools import chain
 from functools import wraps
+import os
 from . import forms, models
 from authentication.models import User
 from appli.models import UserFollows
@@ -133,13 +134,13 @@ def edit_ticket(request, ticket_id):
         ticket_form = forms.TicketForm(instance=ticket)
         if request.method == 'POST':
             # handle the POST request here
-            ticket_form = forms.TicketForm(request.POST, instance=ticket)
+            ticket_form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
             if (ticket_form.is_valid()):
                 ticket = ticket_form.save(commit=False)
                 ticket.user = request.user
                 ticket_form.save()
 
-                return redirect('flux')
+                return redirect('post_list')
 
         context = {
             'ticket_form': ticket_form,
@@ -155,6 +156,9 @@ def delete_ticket(request, ticket_id):
     ticket = models.Ticket.objects.get(id=ticket_id)
 
     if request.method == 'POST':
+        if ticket.image:
+            if os.path.isfile(ticket.image.path):
+                os.remove(ticket.image.path)
         # handle the POST request here
         ticket.delete()
         return redirect('flux')
