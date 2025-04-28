@@ -174,3 +174,16 @@ img {
     display: flex;
     justify-content: center;
 }
+
+.rating-container {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    display: inline-block;
+}
+
+.h3-margin-right {
+    margin-right: 5px;;
+}

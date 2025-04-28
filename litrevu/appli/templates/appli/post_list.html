@@ -23,7 +23,12 @@
             </div>
         {% elif post|get_class == 'Review' %}
             <div class="div_border">
-                <p>{{ post.headline }} </p>
+                <div class="rating-container">
+                    <span><h3 class="h3-margin-right">{{ post.headline }} - </h3></span>
+                    {% for i in "x"|ljust:post.rating %}
+                        <span class="star">★</span>
+                    {% endfor %}
+                </div>
                 <p>{{ post.time_created }}</p>
                 <p>{{ post.body }}</p>
                 <div class="div_border_internal"> 
