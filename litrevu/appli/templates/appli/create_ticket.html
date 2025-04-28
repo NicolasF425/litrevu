@@ -1,10 +1,12 @@
 {% extends 'base_connected.html' %}
 
 {% block content %}
-    <h2>Écrire un billet</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ ticket_form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Publier</button>
-    </form>
+    <h2 class="center">Écrire un billet</h2>
+    <div class="div_border_internal">
+        <form method="post" enctype="multipart/form-data">
+            {{ ticket_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="button">Publier</button>
+        </form>
+    </div>
 {% endblock content %}

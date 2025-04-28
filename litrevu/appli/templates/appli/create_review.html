@@ -1,11 +1,36 @@
 {% extends 'base_connected.html' %}
 
 {% block content %}
-    <h2>Écrire un billet</h2>
-    <form method="post" enctype="multipart/form-data">
-        {{ ticket_form.as_p }}
-        {{ review_form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Publier</button>
-    </form>
+
+    <div class="center">
+        <h2>Créer une critique</h2>
+    </div>
+
+    <div class="div_border_internal">
+        <form method="post" enctype="multipart/form-data">
+            {{ ticket_form.as_p }}
+            
+            <div>
+                <p><h3>Critique</h3></p>
+                <div>
+                    <label>Titre</label>
+                    <p>{{ review_form.headline }}</p>
+                </div>
+                
+                <div class="inline">
+                    <label>Note</label>
+                    <p><span>{{ review_form.rating }}</span></p>
+                </div>
+                
+                <div>
+                    <label>Commentaire</label>
+                    <p>{{ review_form.body }}</p>
+                </div>
+            </div>
+
+            {% csrf_token %}
+            <button type="submit" class="button">Publier</button>
+        </form>
+    </div>
+
 {% endblock content %}

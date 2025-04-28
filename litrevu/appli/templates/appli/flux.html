@@ -14,12 +14,14 @@
             {% if post|get_class == 'Ticket' %}
                 <p>{{ post.user.username }} a demandé une critique</p>
                 <p>{{ post.title }}</p>
-                <p>{{ post.time_created }}</p>
+                <p class="align-right">{{ post.time_created }}</p>
                 <p>{{ post.description }}</p>
                 {% if post.image %}
                     <img src="/media/{{post.image}}" alt="image">
                 {% endif %}
-                <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
+                <div class="align-right">
+                    <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
+                </div>
             {% elif post|get_class == 'Review' %}
                 <p>{{ post.time_created }}</p>
                 <p><h3>{{ post.headline }} - {{ post.rating }} ★</h3></p>

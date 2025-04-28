@@ -16,6 +16,18 @@
     text-align: center;
 }
 
+/* base bordure */
+.base-border {
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding: 1%;
+}
+
 /* bordure ticket et review */
 .div_border {
     margin-left: 15%;
@@ -41,8 +53,8 @@
 }
 
 .div_margins {
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 /* bordure abonnements et abonnes */
@@ -148,9 +160,17 @@ img {
     justify-content: flex-end;
 }
 
-.rating-options-inline {
+.inline {
+    display: inline-block;
+}
+
+.align-right {
     display: flex;
-    flex-direction: row; /* Direction normale (de gauche à droite) */
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }
