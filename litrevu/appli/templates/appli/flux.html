@@ -14,7 +14,7 @@
             {% if post|get_class == 'Ticket' %}
                 <p>{{ post.user.username }} a demandé une critique</p>
                 <p>{{ post.title }}</p>
-                <p class="align-right">{{ post.time_created }}</p>
+                <p class="align-right"><i>{{ post.time_created }}</i></p>
                 <p>{{ post.description }}</p>
                 {% if post.image %}
                     <img src="/media/{{post.image}}" alt="image">
@@ -23,7 +23,8 @@
                     <a href="{% url 'response' post.id %}" class="button">Créer une critique</a>
                 </div>
             {% elif post|get_class == 'Review' %}
-                <p>{{ post.time_created }}</p>
+                <p>{{ post.user.username }} a posté une critique</p>
+                <p class="align-right"><i>{{ post.time_created }}</i></p>
                 <div class="rating-container">
                     <span><h3 class="h3-margin-right">{{ post.headline }} - </h3></span>
                     {% for i in "x"|ljust:post.rating %}
@@ -31,7 +32,7 @@
                     {% endfor %}
                 </div>
                 <p>{{ post.body }}</p>
-                <div class="div_border_internal"> 
+                <div class="div_border_internal">
                     <p>Ticket - {{ post.user.username }}</p>
                     <p>{{ post.ticket.title }}</p>
                     {% if post.ticket.image %}
