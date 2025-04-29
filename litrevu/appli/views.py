@@ -64,7 +64,8 @@ def flux(request):
 
     tickets = models.Ticket.objects.filter(
         Q(user=current_user) |  # Tickets créés par l'utilisateur connecté
-        Q(user__in=followed)  # OU créés par les utilisateurs suivis
+        Q(user__in=followed) |  # OU créés par les utilisateurs suivis
+        Q(ticket__user=current_user)  # OU dont le ticket a été créé par l'utilisateur connecté
     ).order_by('-time_created')
 
     reviews = models.Review.objects.filter(
