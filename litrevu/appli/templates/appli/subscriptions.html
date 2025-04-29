@@ -3,9 +3,9 @@
     <div class="div_margins">
         <h2><p>Suivre d'autres utilisateurs</p></h2>
         <form method="post">
-            <p>{{ form.user_to_follow }} {{ user_not_found }}</p>
+            <p>{{ form.user_to_follow }} {{ message }}</p>
             {% csrf_token %}
-            <button type="submit">Envoyer</button>
+            <button type="submit" class="button">Envoyer</button>
         </form>
     </div>
     <div class="div_margins">
