@@ -10,7 +10,8 @@
         <div class="login-div">
             <p><h3>Connectez-vous</h3></p>
             <form method="post">
-                {{ form.as_p }}
+                <p>{{ form.username }}</p>
+                <p>{{ form.password }}</p>
                 {% csrf_token %}
                 <button type="submit" class="button">Se connecter</button>
             </form>
