@@ -8,7 +8,9 @@
         {{ form.errors }}
     {% endif %}
     <form method="post">
-        {{ form.as_p }}
+        <p>{{ form.username }}</p>
+        <p>{{ form.password1 }}</p>
+        <p>{{ form.password2 }}</p>
         {% csrf_token %}
         <button type="submit" class="button">S’inscrire</button>
         <a href="{% url 'login' %}" class="button">Retour</a>

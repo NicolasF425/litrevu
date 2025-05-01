@@ -8,6 +8,8 @@
 
     <div class="div_border_internal">
         <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
             <div>
                 <p>Livre / Article</p>
                 <p>Titre</p>
@@ -19,24 +21,34 @@
             </div>
             
             <div>
-                <p><h3>Critique</h3></p>
+                <h3>Critique</h3>
                 <div>
                     <label>Titre</label>
                     <p>{{ review_form.headline }}</p>
                 </div>
                 
-                <div class="inline">
-                    <label>Note</label>
-                    <p><span>{{ review_form.rating }}</span></p>
+                <div id="id_second-rating" class="inline">
+                    <span>Note</span>
+                        <label for="id_second-rating_0"><input type="radio" name="second-rating" value="0" required="" id="id_second-rating_0">
+                    0</label>
+                        <label for="id_second-rating_1"><input type="radio" name="second-rating" value="1" required="" id="id_second-rating_1">
+                    1</label>    
+                        <label for="id_second-rating_2"><input type="radio" name="second-rating" value="2" required="" id="id_second-rating_2">
+                    2</label>     
+                        <label for="id_second-rating_3"><input type="radio" name="second-rating" value="3" required="" id="id_second-rating_3">
+                    3</label>                  
+                        <label for="id_second-rating_4"><input type="radio" name="second-rating" value="4" required="" id="id_second-rating_4">
+                    4</label>
+                        <label for="id_second-rating_5"><input type="radio" name="second-rating" value="5" required="" id="id_second-rating_5">
+                    5</label>
                 </div>
                 
                 <div>
-                    <label>Commentaire</label>
+                    <p>Commentaire</p>
                     <p>{{ review_form.body }}</p>
                 </div>
             </div>
 
-            {% csrf_token %}
             <button type="submit" class="button">Publier</button>
         </form>
     </div>
