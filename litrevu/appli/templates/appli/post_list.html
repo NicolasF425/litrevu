@@ -27,8 +27,12 @@
                 <p>Vous avez publié une critique</p>
                 <div class="rating-container">
                     <span><h3 class="h3-margin-right">{{ post.headline }} - </h3></span>
-                    {% for i in "x"|ljust:post.rating %}
-                        <span class="star">★</span>
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= post.rating %}
+                            <span class="filled">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <p class="align-right"><i>{{ post.time_created }}</i></p>

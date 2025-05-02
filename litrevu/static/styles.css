@@ -180,8 +180,17 @@ img {
     align-items: center;
 }
 
+
 .star {
-    display: inline-block;
+    font-size: 1.4em;
+}
+
+.filled {
+    color: gold;
+}
+
+.empty {
+    color: #bbb;
 }
 
 .h3-margin-right {
