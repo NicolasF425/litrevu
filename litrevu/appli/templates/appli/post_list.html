@@ -29,9 +29,9 @@
                     <span><h3 class="h3-margin-right">{{ post.headline }} - </h3></span>
                     {% for i in "12345" %}
                         {% if forloop.counter <= post.rating %}
-                            <span class="filled">★</span>
+                            <span class="star filled">★</span>
                         {% else %}
-                            <span class="empty">★</span>
+                            <span class="star empty">★</span>
                         {% endif %}
                     {% endfor %}
                 </div>

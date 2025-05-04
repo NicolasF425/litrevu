@@ -54,8 +54,12 @@ Puis dans un navigateur entrer l'url : http://127.0.0.1:8000/ pour lancer l'appl
 
 http://127.0.0.1:8000/admin/ permet de lancer la console d'administration
 
- 
+Le compte administrateur est :
+adminrevu
+review321
 
+
+ 
 
 
 
