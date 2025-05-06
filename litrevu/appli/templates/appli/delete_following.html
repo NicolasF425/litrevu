@@ -2,13 +2,11 @@
 
 {% block content %}
 
-    <h1>Supprimer un ticket</h1>
-
-    <p>Ne plus suivre : {{ following.followed_user.username }} ?</p>
+    <p><h1>Ne plus suivre : {{ following.followed_user.username }} ?</h></p>
 
     <form action="" method="post">
     {% csrf_token %}
-    <input type="submit" value="Supprimer">
+    <input type="submit" value="Supprimer" class="button">
     </form>
 
     {% endblock content %}
