@@ -12,12 +12,12 @@
         <form method="post" enctype="multipart/form-data">
 
             <div class="div_border_internal">
-                <p>{{ ticket_form.instance.user.username }} a demandé une critique</p>
-                <p>{{ ticket_form.instance.title }}</p>
-                <p class="align-right">{{ ticket_form.instance.time_created }}</p>
-                <p>{{ ticket_form.intance.description }}</p>
-                {% if ticket_form.instance.image %}
-                    <img src="/media/{{ticket_form.instance.image}}" alt="image">
+                <p>{{ ticket.user.username }} a demandé une critique</p>
+                <p class="align-date-right"><i>{{ ticket.time_created }}</i></p>
+                <p>{{ ticket.title }}</p>
+                <p>{{ ticket.description }}</p>
+                {% if ticket.image %}
+                    <img src="/media/{{ticket.image}}" alt="image">
                 {% endif %}
             </div>
 

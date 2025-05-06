@@ -240,7 +240,6 @@ def delete_review(request, review_id):
 @ticket_has_review
 def create_response(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
-    ticket_form = forms.TicketForm(instance=ticket)
     review_form = forms.ReviewForm()
     if request.method == 'POST':
         # handle the POST request here
@@ -251,11 +250,10 @@ def create_response(request, ticket_id):
             review.rating = int(review_form.cleaned_data['rating'])
             review.ticket = ticket
             review.save()
-
             return redirect('flux')
 
     context = {
-        'ticket_form': ticket_form,
+        'ticket': ticket,
         'review_form': review_form,
     }
     return render(request, 'appli/create_response.html', context=context)

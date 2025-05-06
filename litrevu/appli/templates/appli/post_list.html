@@ -12,7 +12,7 @@
             <div class="div_border">
                 <p>Vous avez publié un ticket</p>
                 <p>{{ post.title }}</p>
-                <p class="align-right"><i>{{ post.time_created }}</i></p>
+                <p class="align-date-right"><i>{{ post.time_created }}</i></p>
                 <p>{{ post.description }}</p>
                 {% if post.image %}
                     <img src="/media/{{post.image}}" alt="image">
@@ -35,7 +35,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <p class="align-right"><i>{{ post.time_created }}</i></p>
+                <p class="align-date-right"><i>{{ post.time_created }}</i></p>
                 <p>{{ post.body }}</p>
                 <div class="div_border_internal"> 
                     <p>Ticket - {{ post.user.username }}</p>
