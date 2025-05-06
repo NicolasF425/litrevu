@@ -38,7 +38,7 @@
                 <p class="align-date-right"><i>{{ post.time_created }}</i></p>
                 <p>{{ post.body }}</p>
                 <div class="div_border_internal"> 
-                    <p>Ticket - {{ post.user.username }}</p>
+                    <p>Ticket - {{ post.ticket.user.username }}</p>
                     <p>{{ post.ticket.title }}</p>
                     <p>{{ post.ticket.description }}</p>
                     {% if post.image %}

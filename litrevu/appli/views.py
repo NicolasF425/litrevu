@@ -198,28 +198,26 @@ def create_review(request):
 @login_required
 @is_review_owner
 def edit_review(request, review_id):
-    review = get_object_or_404(models.Review, id=review_id)
-    ticket = get_object_or_404(models.Ticket, id=review.ticket.id)
-    review_form = forms.ReviewForm(instance=review, prefix='second')
-    ticket_form = forms.TicketForm(instance=ticket, prefix='first')
+    review = models.Review.objects.get(id=review_id)
+    ticket = get_object_or_404(models.Ticket, id=review.ticket_id)
+    review_form = forms.ReviewForm()
     if request.method == 'POST':
         # handle the POST request here
-        ticket_form = forms.TicketForm(request.POST, request.FILES, prefix='first', instance=ticket)
-        review_form = forms.ReviewForm(request.POST, prefix='second', instance=review)
-        if all([ticket_form.is_valid(), review_form.is_valid()]):
-            ticket = ticket_form.save(commit=False)
-            ticket.save()
+        review_form = forms.ReviewForm(request.POST, )
+        if (review_form.is_valid()):
             review = review_form.save(commit=False)
+            review.user = request.user
+            review.rating = int(review_form.cleaned_data['rating'])
             review.ticket = ticket
             review.save()
-
             return redirect('flux')
 
     context = {
-        'ticket_form': ticket_form,
+        'ticket': ticket,
         'review_form': review_form,
+        'message': "Modifier votre critique",
     }
-    return render(request, 'appli/create_review.html', context=context)
+    return render(request, 'appli/create_response.html', context=context)
 
 
 @login_required
@@ -255,29 +253,7 @@ def create_response(request, ticket_id):
     context = {
         'ticket': ticket,
         'review_form': review_form,
-    }
-    return render(request, 'appli/create_response.html', context=context)
-
-
-@login_required
-@is_review_owner
-def edit_response(request, response_id):
-    response = get_object_or_404(models.Review, id=response_id)
-    ticket = get_object_or_404(models.Ticket, id=response.ticket.id)
-    ticket_form = forms.TicketForm(instance=ticket)
-    review_form = forms.ReviewForm(instance=response)
-    if request.method == 'POST':
-        # handle the POST request here
-        review_form = forms.ReviewForm(request.POST, instance=response)
-        if (review_form.is_valid()):
-            review = review_form.save(commit=False)
-            review.save()
-
-            return redirect('flux')
-
-    context = {
-        'ticket_form': ticket_form,
-        'review_form': review_form,
+        'message': "Créer une critique",
     }
     return render(request, 'appli/create_response.html', context=context)
 
