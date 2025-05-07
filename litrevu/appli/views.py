@@ -122,6 +122,7 @@ def create_ticket(request):
 
     context = {
         'ticket_form': ticket_form,
+        'message': "Créer un ticket",
     }
     return render(request, 'appli/create_ticket.html', context=context)
 
@@ -145,6 +146,7 @@ def edit_ticket(request, ticket_id):
 
         context = {
             'ticket_form': ticket_form,
+            'message': "Modifier le ticket",
         }
         return render(request, 'appli/create_ticket.html', context=context)
     else:
