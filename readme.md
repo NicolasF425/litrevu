@@ -47,12 +47,14 @@ Le fichier requirements.txt doit être présent dans le dossier du projet
 ### **Execution du programme :**
 
 Lance le serveur à partir du répertoire du projet :
+
 cd litrevu
+
 python manage.py runserver
 
 Puis dans un navigateur entrer l'url : http://127.0.0.1:8000/ pour lancer l'application
 
-http://127.0.0.1:8000/admin/ permet de lancer la console d'administration
+http://127.0.0.1:8000/admin/ permet de lancer la console d'administration qui permet d'avoir un aperçu des données en base.
 
 Le compte administrateur est :
 
@@ -68,7 +70,18 @@ password : review321
 
 Attention, le login est sensible à la casse !
 
+### Initialisation de la base de données (si fichier db.sqlite3 non présent) :
 
+python manage.py migrate
 
+python manage.py makemigrations
+
+python manage.py migrate
+
+Puis créer un compte superuser : python manage.py createsuperuser
+
+### Documentation de Django
+
+https://docs.djangoproject.com/en/5.2/
 
 
