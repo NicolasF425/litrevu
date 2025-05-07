@@ -3,13 +3,15 @@
 
 {% block content %}
 
-    <h1>Supprimer un ticket</h1>
+    <div class="div_margins">
+        <h1>Supprimer un ticket</h1>
 
-    <p>Etes-vous sûr de vouloir supprimer le ticket : {{ ticket.title }} ?</p>
+        <p>Etes-vous sûr de vouloir supprimer le ticket : {{ ticket.title }} ?</p>
 
-    <form action="" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Supprimer" class="button">
-    </form>
+        <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Supprimer" class="button">
+        </form>
+    </div>
 
 {% endblock content %}

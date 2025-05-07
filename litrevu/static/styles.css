@@ -201,3 +201,7 @@ img {
     display: flex;
     justify-content: flex-end;
 }
+
+.background-color {
+    background-color: #eee;
+}
