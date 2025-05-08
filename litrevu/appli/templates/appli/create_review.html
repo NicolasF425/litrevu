@@ -29,18 +29,10 @@
                 
                 <div id="id_second-rating" class="inline">
                     <span>Note</span>
-                        <label for="id_second-rating_0"><input type="radio" name="second-rating" value="0" required="" id="id_second-rating_0">
-                    0</label>
-                        <label for="id_second-rating_1"><input type="radio" name="second-rating" value="1" required="" id="id_second-rating_1">
-                    1</label>    
-                        <label for="id_second-rating_2"><input type="radio" name="second-rating" value="2" required="" id="id_second-rating_2">
-                    2</label>     
-                        <label for="id_second-rating_3"><input type="radio" name="second-rating" value="3" required="" id="id_second-rating_3">
-                    3</label>                  
-                        <label for="id_second-rating_4"><input type="radio" name="second-rating" value="4" required="" id="id_second-rating_4">
-                    4</label>
-                        <label for="id_second-rating_5"><input type="radio" name="second-rating" value="5" required="" id="id_second-rating_5">
-                    5</label>
+                    {% for radio in review_form.rating %}
+                        <label for="{{ radio.id_for_label }}">{{ radio.tag }}
+                        {{ radio.choice_label }}</label>
+                    {% endfor %}
                 </div>
                 
                 <div>

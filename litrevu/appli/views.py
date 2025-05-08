@@ -177,8 +177,8 @@ def create_review(request):
     review_form = forms.ReviewForm()
     if request.method == 'POST':
         # handle the POST request here
-        ticket_form = forms.TicketForm(request.POST, request.FILES, prefix='first')
-        review_form = forms.ReviewForm(request.POST, prefix='second')
+        ticket_form = forms.TicketForm(request.POST, request.FILES)
+        review_form = forms.ReviewForm(request.POST)
         if all([ticket_form.is_valid(), review_form.is_valid()]):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
