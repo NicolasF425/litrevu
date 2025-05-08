@@ -44,9 +44,15 @@ Aller dans le répertoire du projet puis exécuter : pip install -r requirements
 
 Le fichier requirements.txt doit être présent dans le dossier du projet
 
+### ** Vérifications de conformité avec PEP8
+
+Dans le répertoire du projet, lancer la commande :
+
+flake8 --max-line-length 110 --format=html --htmldir=flake8-report
+
 ### **Execution du programme :**
 
-Lance le serveur à partir du répertoire du projet :
+Lance le serveur : à partir du répertoire du projet :
 
 cd litrevu
 
